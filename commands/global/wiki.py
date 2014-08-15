@@ -29,9 +29,11 @@ class wiki(Command):
 
         if not results.get('pages', False): return
         page = results['pages'].popitem()[1]
+        title = page['title']
+
         if not page.get('pageid', False): 
             return self.message("No Wikipedia page for \"%s\"" % query, self.user)
-        title = page['title']
+
         url = "http://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=%s&inprop=url&format=xml" % page['pageid']
         xml = ElementTree.fromstring(urllib.urlopen(url).read())
         url = xml.findall(".//page[1]")[0].get('fullurl')

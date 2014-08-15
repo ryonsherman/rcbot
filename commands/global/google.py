@@ -25,7 +25,7 @@ class google(Command):
         results = json.loads(urllib.urlopen(url).read())['responseData']['results']
 
         if not results:
-            return self.message("No search results for \"%s\"" % query, self.user)
+            return self.message("No Google results for \"%s\"" % query, self.user)
         
         result = results[0]
         title = HTMLParser().unescape(result['titleNoFormatting'])[:-4].strip()
